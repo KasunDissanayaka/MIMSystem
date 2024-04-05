@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('email')->nullable();
             $table->integer('age')->nullable();
             $table->string('nic_number')->nullable();
+            $table->enum('gender', ['Male', 'Female', 'Other'])->default('Male');
             $table->timestamps();
             $table->softDeletes();
         });

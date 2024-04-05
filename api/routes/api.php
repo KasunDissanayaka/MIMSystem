@@ -5,5 +5,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 Route::post('/v1/auth/login',[UserAuthController::class, 'login']);
-Route::get('/v1/auth/users',[UserAuthController::class, 'index']);
+Route::get('/v1/auth/users',[UserAuthController::class, 'index'])->middleware('auth:sanctum');
 Route::post('/v1/auth/logout',[UserAuthController::class, 'logout'])->middleware('auth:sanctum');
+
+Route::get('/v1/customer',[CustomerRecordController::class, 'index'])->middleware('auth:sanctum');
