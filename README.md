@@ -1,4 +1,5 @@
 Laravel API Application (MIM System)
+
 Overview
 This is a Laravel API application built to provide endpoints for managing customers and medication inventory. It utilizes Laravel Sanctum for API token authentication and Spatie Laravel Permission for handling user permissions.
 
@@ -9,6 +10,7 @@ CRUD operations for managing medication inventory.
 Role-based access control (RBAC) using Spatie Laravel Permission.
 Soft delete and permanent delete functionality for records.
 API routes protected by authentication and authorization middleware.
+
 Requirements
 PHP >= 7.4
 Composer
@@ -25,6 +27,7 @@ php artisan db:seed
 Usage
 php artisan serve
 Access the API endpoints using your preferred HTTP client (e.g., Postman).
+
 
 API Endpoints
 
@@ -45,8 +48,11 @@ PUT /v1/medication/{id}: Update medication inventory.
 DELETE /v1/medication/{id}: Delete medication inventory.
 DELETE /v1/medication/{id}/permanently: Permanently delete medication inventory.
 GET /v1/medication/{id}/restore: Restore a soft deleted medication inventory.
+
 Authentication and Authorization
 Authentication is handled via Laravel Sanctum.
 API routes are protected by the auth:sanctum middleware.
 Authorization is implemented using Spatie Laravel Permission.
 Role-based access control (RBAC) is used to restrict access to certain routes based on user roles and permissions.
+
+
