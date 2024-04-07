@@ -76,16 +76,7 @@ class UserAuthController extends Controller
      */
     public function show(string $id)
     {
-        $userRecord = $this->userRepository->getUserById($id);
-        
-        if(!$userRecord)
-        {
-            return response()->json(['error' => 'User not found'],404);
-        }
 
-        return response()->json([
-            'data' => $userRecord
-        ]);
     }
 
     /**
@@ -101,22 +92,7 @@ class UserAuthController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $userRecord = $this->userRepository->getUserById($id);
 
-        if(!$userRecord)
-        {
-            return response()->json(['status' => false, 'message' => 'Record not found'],404);
-        }
-
-        $userData = $request->all();
-
-        if($this->userRepository->updateUserById($userData, $id))
-        {
-            return response()->json(['status' => true, 'message' => 'User has been updated'],200);
-        }else
-        {
-            return response()->json(['status' => false, 'message' => 'Failed to update record'],500);
-        }
     }
 
     /**

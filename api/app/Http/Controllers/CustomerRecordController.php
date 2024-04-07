@@ -2,23 +2,24 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\CustomerRecord;
-use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use App\Repositories\CustomerRecordRepository;
 
 class CustomerRecordController extends Controller
 {
+    protected $customerRepository;
+
+    public function __construct(CustomerRecordRepository $customerRepository) 
+    {
+        $this->customerRepository = $customerRepository;
+    }
+
     /**
      * Display a listing of the resource.
      */
-    public function index(CustomerRecord $customerRecord, User $user)
+    public function index()
     {
-        if(Auth::user()->can('customer_write')){
-            echo 'yes';
-        }else{
-            echo 'no';
-        }
+
     }
 
     /**
