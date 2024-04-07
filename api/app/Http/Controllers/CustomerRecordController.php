@@ -87,7 +87,7 @@ class CustomerRecordController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function softDelete(string $id)
     {
         if ($this->customerRepository->softDelete($id)) {
             return response()->json(['message' => 'Customer soft deleted']);

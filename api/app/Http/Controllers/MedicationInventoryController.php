@@ -86,7 +86,7 @@ class MedicationInventoryController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function softDelete(string $id)
     {
         if ($this->medicationInventoryRepo->softDelete($id)) {
             return response()->json(['message' => 'Record deleted successfully'], 200);

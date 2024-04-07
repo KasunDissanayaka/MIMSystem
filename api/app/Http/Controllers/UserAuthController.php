@@ -90,6 +90,7 @@ class UserAuthController extends Controller
             }
 
             $user = $this->userRepository->findByEmail($request->email);
+            
             return response()->json([
                 'status' => true,
                 'message' => 'User Logged In Successfully',
