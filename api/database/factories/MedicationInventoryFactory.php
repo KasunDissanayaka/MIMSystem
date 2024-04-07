@@ -16,13 +16,16 @@ class MedicationInventoryFactory extends Factory
      */
     public function definition(): array
     {
+        $medicationName = $this->faker->unique()->word;
+        $medicationName .= ' ' . $this->faker->numberBetween(1, 1000) . 'Mg';
+
         return [
-            'name' => $this->faker->name,
+            'name' => $medicationName,
             'description' => $this->faker->paragraph,
             'quantity' => $this->faker->numberBetween(1, 100),
             'expiry_date' => $this->faker->dateTimeBetween('now', '+1 year')->format('Y-m-d'),
             'manufacturer' => $this->faker->company,
-            'price' => $this->faker->randomFloat(2, 1, 1000),
+            'price' => 'Rs.'.$this->faker->randomFloat(2, 1, 1000),
         ];
     }
 }
