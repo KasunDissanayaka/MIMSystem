@@ -3,12 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Interfaces\UserRepositoryInterface;
-use App\Models\User;
-use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
 
 class UserAuthController extends Controller
 {
@@ -22,52 +19,18 @@ class UserAuthController extends Controller
      * Display a listing of the resource.
      */
 
-    public function index() : JsonResponse 
+    public function index() 
     {
         return response()->json([
+            'status' => true,
             'data' => $this->userRepository->getAllUsers()
-        ]);
+        ], 200);
     }
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request) : JsonResponse
+    public function store(Request $request)
     {
-        try{
-            
-            $validateUser = Validator::make($request->all(), 
-            [
-                'name' => 'required|string',
-                'email' => 'required|email|unique:users',
-                'password' => 'required|min:8|confirmed',
-            ]);
-
-            if($validateUser->fails()){
-                return response()->json([
-                    'status' => false,
-                    'message' => 'validation error',
-                    'errors' => $validateUser->errors()
-                ], 401);
-            }
-
-            $newUser = [
-                'name'      => $request->name,
-                'email'     => $request->email,
-                'password'  => $request->password,
-            ];
-
-            if($this->userRepository->createUser($newUser)){
-                return response()->json([
-                    'message' => 'User has been created',
-                ]);    
-            }
-
-        } catch (\Throwable $th) {
-            return response()->json([
-                'status' => false,
-                'message' => $th->getMessage()
-            ], 500);
-        }
 
     }
 
@@ -100,43 +63,33 @@ class UserAuthController extends Controller
      */
     public function destroy(string $id)
     {
-        $userRecord = $this->userRepository->getUserById($id);
 
-        if(!$userRecord){
-            return response()->json(['status' => false, 'message' => 'User not found'],404);
-        }
-
-        $this->userRepository->userDeleteById($id);
-
-        return response()->json(['status' => true, 'message' => 'User deleted successfully'],200);
     }
 
     public function login(Request $request)
     {
         try {
-            $validateUser = Validator::make($request->all(), 
-            [
+            $validator = Validator::make($request->all(), [
                 'email' => 'required|email',
                 'password' => 'required'
             ]);
 
-            if($validateUser->fails()){
+            if ($validator->fails()) {
                 return response()->json([
                     'status' => false,
-                    'message' => 'validation error',
-                    'errors' => $validateUser->errors()
+                    'message' => 'Validation error',
+                    'errors' => $validator->errors()
                 ], 401);
             }
 
-            if(!Auth::attempt($request->only(['email', 'password']))){
+            if (!Auth::attempt($request->only(['email', 'password']))) {
                 return response()->json([
                     'status' => false,
                     'message' => 'Email & Password does not match with our record.',
                 ], 401);
             }
 
-            $user = User::where('email', $request->email)->first();
-
+            $user = $this->userRepository->findByEmail($request->email);
             return response()->json([
                 'status' => true,
                 'message' => 'User Logged In Successfully',

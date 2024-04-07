@@ -2,11 +2,10 @@
 
 namespace App\Interfaces;
 
+use Illuminate\Database\Eloquent\Collection;
+
 interface UserRepositoryInterface 
 {
-    public function getAllUsers();
-    public function createUser($newUser);
-    public function getUserById($id);
-    public function userDeleteById($id);
-    public function updateUserById($userData, $id);
+    public function getAllUsers() : Collection;
+    public function findByEmail($email);
 }

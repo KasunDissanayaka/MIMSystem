@@ -22,7 +22,7 @@ class CustomerRecordFactory extends Factory
             'contact_information' => $this->faker->phoneNumber,
             'email' => $this->faker->email,
             'age' => $this->faker->numberBetween(18, 100),
-            'nic_number' => $this->faker->regexify('[0-9]{5}-[0-9]{7}-[0-9]{1}'),
+            'nic_number' => $this->faker->regexify('[0-9]{9}V'),
             'gender' => $this->faker->randomElement(['Male', 'Female', 'Other']),
         ];
     }
