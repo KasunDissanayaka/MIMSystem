@@ -23,7 +23,7 @@ Route::middleware(['auth:sanctum','role:Owner'])->group(function () {
     Route::post('/v1/medication', [MedicationInventoryController::class, 'store']);
     Route::delete('/v1/medication/{id}/permanently', [MedicationInventoryController::class, 'permanentlyDelete']);
     Route::get('/v1/customers/{id}/restore', [CustomerRecordController::class, 'restore']);
-    Route::get('/v1/medication/{id}/restore', [CustomerRecordController::class, 'restore']);
+    Route::get('/v1/medication/{id}/restore', [MedicationInventoryController::class, 'restore']);
 });
 
 Route::middleware(['auth:sanctum','role:Owner|Manager'])->group(function () {
