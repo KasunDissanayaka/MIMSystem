@@ -18,8 +18,7 @@ This is a Laravel API application built to provide endpoints for managing custom
 
 - PHP >= 7.4
 - Composer
-- MySQL or other compatible database
-- Node.js and npm (for frontend assets, if applicable)
+- MySQL or SQLite or other compatible database
 
 ## Installation
 
